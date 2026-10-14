@@ -1,5 +1,3 @@
-
-
 package org.example
 
 /**
@@ -7,8 +5,7 @@ package org.example
  */
 object CoffeeMachine {
 
-    // Estado inicial de la maquina.
-    var currentState: CoffeeMachineState = CoffeeMachineState.Inicio
+    private var currentState: CoffeeMachineState = CoffeeMachineState.Inicio
 
     /**
      * Gestiona los cambios entre los estados de la maquina.
@@ -24,8 +21,26 @@ object CoffeeMachine {
             }
 
             is CoffeeMachineState.Idle -> {
-                println("Maquina encendida. Selecciona un cafe.")
-                currentState = CoffeeMachineState.SelectCoffee("Nescafe")
+                println("Selecciona un cafe:")
+                println("1. Nescafe")
+                println("2. Cappuccino")
+                println("3. Espresso")
+                print("Elige una opcion: ")
+
+                val opcion = readln()
+
+                val cafe = when (opcion) {
+                    "1" -> TipoCafe.NESCAFE
+                    "2" -> TipoCafe.CAPPUCCINO
+                    "3" -> TipoCafe.ESPRESSO
+                    else -> null
+                }
+
+                if (cafe != null) {
+                    currentState = CoffeeMachineState.SelectCoffee(cafe)
+                } else {
+                    println("Opcion no valida.")
+                }
             }
 
             is CoffeeMachineState.SelectCoffee -> {
@@ -47,6 +62,7 @@ object CoffeeMachine {
 
             is CoffeeMachineState.ServingCoffee -> {
                 println("Sirviendo cafe ${estado.type}.")
+                println("Disfruta de tu cafe!")
                 currentState = CoffeeMachineState.Idle()
             }
 
@@ -62,5 +78,6 @@ object CoffeeMachine {
         }
 
         println("Nuevo estado: $currentState")
+        println()
     }
 }

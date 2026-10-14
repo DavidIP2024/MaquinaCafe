@@ -12,13 +12,13 @@ sealed class CoffeeMachineState {
         val timestamp: Long = System.currentTimeMillis()
     ) : CoffeeMachineState()
 
-    data class MakingCoffee(val type: String) : CoffeeMachineState()
+    data class MakingCoffee(val type: TipoCafe) : CoffeeMachineState()
 
-    data class SelectCoffee(val type: String) : CoffeeMachineState()
+    data class SelectCoffee(val type: TipoCafe) : CoffeeMachineState()
 
-    data class PaymentCoffee(val type: String) : CoffeeMachineState()
+    data class PaymentCoffee(val type: TipoCafe) : CoffeeMachineState()
 
-    data class ServingCoffee(val type: String) : CoffeeMachineState()
+    data class ServingCoffee(val type: TipoCafe) : CoffeeMachineState()
 
     data class Apagado(val type: String) : CoffeeMachineState()
 
